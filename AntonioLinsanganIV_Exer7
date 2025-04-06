@@ -1,0 +1,39 @@
+import numpy as np
+import matplotlib.pyplot as plt
+from skimage import io, color
+import os
+
+# Load the image
+image_path = 'nioshiii.jpg'
+if not os.path.exists(image_path):
+    print(f"Error: The image '{image_path}' does not exist.")
+    exit()
+image = io.imread(image_path)
+
+plt.subplot(2, 2, 1)
+plt.imshow(image)
+plt.title('Original Image')
+
+# Convert to grayscale
+gray_image = color.rgb2gray(image)
+plt.subplot(2, 2, 2)
+plt.imshow(gray_image, cmap='gray')
+plt.title('Gray Image')
+
+# Crop the image
+# Dynamic cropping parameters
+crop_start = 50
+crop_end = 150
+cropped_image = gray_image[crop_start:crop_end, crop_start:crop_end]  # Example cropping
+
+plt.subplot(2, 2, 3)
+plt.imshow(cropped_image, cmap='gray')
+plt.title('Cropped Image')
+
+# Compute mean and standard deviation
+mean_value = np.mean(cropped_image)
+std_value = np.std(cropped_image)
+print('Mean:', mean_value)
+print('Standard Deviation:', std_value)
+
+# Removed correlation coefficient calculation for relevance
